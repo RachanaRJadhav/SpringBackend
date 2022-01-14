@@ -51,7 +51,7 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 	
 	@Override
 	@Modifying(clearAutomatically = true)
-	public void updateSelection(int id,short is_select) 
+	public void updateSelection(Selection sel) 
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
@@ -61,10 +61,25 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		//qry.setParameter("t", T_skills );
 		//int status=qry.executeUpdate();
 		//System.out.println(status);  
-		Selection s1=session.get(Selection.class, id);
+		/*Selection s1=session.get(Selection.class, id);
 		s1.setIs_select(is_select);
 		
-		session.update(s1);
+		session.update(s1);*/
+		List<Selection> selList= session.createQuery("from Selection").list();
+		boolean exist1 = false;
+		for(Selection currentSelection: selList)
+		{
+			if(currentSelection.getStud_sel_id()==sel.getStud_sel_id());
+			{
+			exist1=true;
+			currentSelection.setIs_select(sel.getIs_select());
+			
+		     }
+		}
+		if(!exist1) {
+			selList.add(sel);
+			
+		}
 		session.getTransaction().commit();
 		session.close();
 		

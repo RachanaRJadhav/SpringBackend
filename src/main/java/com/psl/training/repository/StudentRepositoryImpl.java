@@ -62,7 +62,8 @@ public class StudentRepositoryImpl implements StudentRepository {
 
 	@Override
 	@Modifying(clearAutomatically = true)
-	public void updateStudent(int id,double cgpa,String T_skills) 
+	
+	public void updateStudent(Student std) 
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
@@ -72,19 +73,43 @@ public class StudentRepositoryImpl implements StudentRepository {
 		//qry.setParameter("t", T_skills );
 		//int status=qry.executeUpdate();
 		//System.out.println(status);  
-		Student s1=session.get(Student.class, id);
+		/*Student s1=session.get(Student.class, id);
 		s1.setCgpa(cgpa);
 		s1.setT_skills(T_skills);
 		session.update(s1);
 		session.getTransaction().commit();
+		session.close();*/
+		List<Student> stdList= session.createQuery("from Student").list();
+		boolean exist1 = false;
+		for(Student currentStudent: stdList)
+		{
+			if(currentStudent.getStd_id()==std.getStd_id());
+			{
+			exist1=true;
+			currentStudent.setCgpa(std.getCgpa());
+			currentStudent.setT_skills(std.getT_skills());
+		     }
+		}
+		if(!exist1) {
+			stdList.add(std);
+			
+		}
+		session.getTransaction().commit();
 		session.close();
+		
+	}
+	
+
+	@Override
+	public void deleteStudent(int id) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	
 	
-	@Override
-	public void deleteStudent(int id) {
+//	@Override
+	/*public void deleteStudent(int id) {
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
 		//Query qry=session.createQuery("delete from student where std_id=:i");
@@ -95,7 +120,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 		session.delete(s1);
 		session.getTransaction().commit();
 		
-	}
+	}*/
 
 	
 	/* @Override

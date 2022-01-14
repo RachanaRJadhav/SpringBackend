@@ -26,9 +26,9 @@ public class StudentServices {
 	public void insertStudent(Student student) {
 		repository.addStudent(student);
 	}
-	public void updateStudents(int id,double cgpa,String T_skills)
+	public void updateStudents(Student std)
 	{
-		 repository.updateStudent(id,cgpa,T_skills);
+		 repository.updateStudent(std);
 	}
 	public void deleteStudents(int id)
 	{

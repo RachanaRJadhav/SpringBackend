@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.psl.training.model.Company;
 import com.psl.training.model.Selection;
+import com.psl.training.model.Student;
 import com.psl.training.services.SelectionService;
 
 @RequestMapping("/api1")
@@ -31,8 +32,8 @@ public class SelectionController {
 		return service.getAllSelections();
 		
 	}
-	@GetMapping("/selections1")
-	public Selection getSelectionById(@RequestParam  int id){
+	@GetMapping("/selections1/{id}")
+	public Selection getSelectionById(@PathVariable int id){
 		return service.getSelectionsById(id);
 		
 	}
@@ -42,12 +43,12 @@ public class SelectionController {
 		return "Selection table created sucessfully";
 	}
 	@PutMapping("/selections")
-	public String updateStudent(@RequestParam int id,@RequestParam short is_select )
+	
+	public String updateSelection(@RequestBody Selection sel )
 	{		
 	
-	    service.updateSelections(id,is_select);
+	    service.updateSelections(sel);
 		return "Selection updated sucessfully";
 		
 	}
-	
 }

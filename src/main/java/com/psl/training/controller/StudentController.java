@@ -47,11 +47,11 @@ public class StudentController {
 		 service.insertStudent(std);
 		return "Student created sucessfully";
 	}
-	@PutMapping("/students/")
-	public String updateStudent(@RequestParam int id,@RequestParam double cgpa,@RequestParam ("t") String T_skills )
+	@PutMapping("/students")
+	public String updateStudent(@RequestBody Student std )
 	{		
 	
-	    service.updateStudents(id,cgpa,T_skills);
+	    service.updateStudents(std);
 		return "Student updated sucessfully";
 		
 	}

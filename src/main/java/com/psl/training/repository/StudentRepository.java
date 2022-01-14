@@ -9,7 +9,7 @@ public interface StudentRepository {
 	public List<Student> getAllStudents() ;
 	public Student getStudentById(int id);
 	public void  deleteStudent(int id);
-	public void updateStudent(int id,double cgpa,String T_skills);
+	public void updateStudent(Student std);
 	public void  addStudent(Student std);
 	//public List<Student> getStudentsByDepartment(String deptName);
 }
