@@ -26,6 +26,10 @@ public class SelectionService {
 	public void insertSelection(Selection sel) {
 		repository.addSelection(sel);
 	}
+	public void updateSelections(int id,short is_select)
+	{
+		 repository.updateSelection(id,is_select);
+	}
 	
 /*	public List<Student> getEmployesByDepartment(String deptname) {
 		return repository.getEmployeesByDepartment(deptname);

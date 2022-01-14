@@ -4,17 +4,23 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.psl.training.model.Company;
 import com.psl.training.model.Selection;
 import com.psl.training.services.SelectionService;
 
 @RequestMapping("/api1")
 @RestController
+@CrossOrigin(origins="http//localhost:3000")
 public class SelectionController {
 
 	@Autowired
@@ -25,9 +31,23 @@ public class SelectionController {
 		return service.getAllSelections();
 		
 	}
-	@PostMapping("/selections")
+	@GetMapping("/selections1")
+	public Selection getSelectionById(@RequestParam  int id){
+		return service.getSelectionsById(id);
+		
+	}
+	@PostMapping("/selections2")
 	public String insertSelection(@RequestBody Selection sel){		
 		 service.insertSelection(sel);
 		return "Selection table created sucessfully";
 	}
+	@PutMapping("/selections")
+	public String updateStudent(@RequestParam int id,@RequestParam short is_select )
+	{		
+	
+	    service.updateSelections(id,is_select);
+		return "Selection updated sucessfully";
+		
+	}
+	
 }

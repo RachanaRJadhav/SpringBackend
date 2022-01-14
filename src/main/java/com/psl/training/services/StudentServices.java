@@ -26,7 +26,14 @@ public class StudentServices {
 	public void insertStudent(Student student) {
 		repository.addStudent(student);
 	}
-	
+	public void updateStudents(int id,double cgpa,String T_skills)
+	{
+		 repository.updateStudent(id,cgpa,T_skills);
+	}
+	public void deleteStudents(int id)
+	{
+		 repository.deleteStudent(id);
+	}
 /*	public List<Student> getEmployesByDepartment(String deptname) {
 		return repository.getEmployeesByDepartment(deptname);
 	} */
