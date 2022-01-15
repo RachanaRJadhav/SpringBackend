@@ -37,14 +37,19 @@ public class SelectionController {
 		return service.getSelectionsById(id);
 		
 	}
-	@GetMapping("/selectionsapp")
-	public List<Selection> getSelectionByapp(){
-		return service.getSelectionByIsapp();
+	@GetMapping("/selectionselectedcompanylist")//in student portal for displaying company is who have selected that student
+	public List<Selection> getCompanyList(@RequestBody Selection sel){
+		return service.getCompanyList(sel);
 		
 	}
-	@GetMapping("/selectionssel")
-	public List<Selection> getSelectionByselect(){
-		return service.getSelectionByIsselect();
+	@GetMapping("/selectionsSelectedstudentlist")// in company portal for displaying student selected list
+	public List<Selection> getselectedStudentList(@RequestBody Selection sel){
+		return service.getselectedStudentsList(sel);
+		
+	}
+	@GetMapping("/selectionsappliedstudentlist")//in company for displaying students not selected but have applied
+	public List<Selection> getAppliedStudentsList(@RequestBody Selection sel){
+		return service.getAppliedStudentsList(sel);
 		
 	}
 	@PostMapping("/selections")

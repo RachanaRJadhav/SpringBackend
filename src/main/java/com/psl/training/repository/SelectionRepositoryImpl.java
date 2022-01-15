@@ -101,7 +101,7 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		
 	}
 	@Override
-	public List<Selection> getSelectionapply()
+	public List<Selection> getCompanyList(Selection sel)
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
@@ -111,18 +111,19 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		List<Selection> s2 =  new ArrayList<Selection>();
 		for(Selection currentSelection: selList)
 		{
-			if(currentSelection.getIs_applied()==1 && currentSelection.getIs_select()==0 || currentSelection.getIs_select()==1)
+			if( currentSelection.getStd_id()==sel.getStd_id()   && currentSelection.getIs_select()==1 && currentSelection.getIs_applied()==1)
 			{
 			
 			 s2.add(currentSelection);
 			}
 		
 		}
+		 
 		return s2;
 	}
 
 	@Override
-	public List<Selection> getSelectionselect()
+	public List<Selection> getselectedStudentsList(Selection sel)
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
@@ -132,16 +133,42 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		List<Selection> s2 =  new ArrayList<Selection>();
 		for(Selection currentSelection: selList)
 		{
-			if(currentSelection.getIs_select()==1 && currentSelection.getIs_applied()==1)
+			if( currentSelection.getComp_id()==sel.getComp_id()   && currentSelection.getIs_select()==1 && currentSelection.getIs_applied()==1)
 			{
 			
 			 s2.add(currentSelection);
 			}
 		
 		}
+		 
 		return s2;
 	}
 
+
+	@Override
+	public List<Selection> getAppliedStudentsList(Selection sel)
+	{
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		
+		Selection s1 = new Selection();
+		List<Selection> selList= session.createQuery("from Selection").list();
+		List<Selection> s2 =  new ArrayList<Selection>();
+		for(Selection currentSelection: selList)
+		{
+			if( currentSelection.getComp_id()==sel.getComp_id()   && currentSelection.getIs_select()==0 && currentSelection.getIs_applied()==1)
+			{
+			
+			 s2.add(currentSelection);
+			}
+		
+		}
+		 
+		return s2;
+	}
+
+	
+	
 	
 
 	/* @Override
