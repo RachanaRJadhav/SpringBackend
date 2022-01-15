@@ -7,8 +7,10 @@ import com.psl.training.model.Selection;
 public interface SelectionRepository {
 	public List<Selection> getAllSelections() ;
 	public Selection getSelectionById(int id);
+	public List<Selection> getSelectionapply();
+	public List<Selection> getSelectionselect();
 	public void  deleteSelection(int id);
 	public void  addSelection(Selection sel);
-	public void updateSelection(Selection sel);
+	public int updateSelection(Selection sel);
 	//public List<Student> getStudentsByDepartment(String deptName);
 }

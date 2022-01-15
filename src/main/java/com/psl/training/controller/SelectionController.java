@@ -19,7 +19,7 @@ import com.psl.training.model.Selection;
 import com.psl.training.model.Student;
 import com.psl.training.services.SelectionService;
 
-@RequestMapping("/api1")
+@RequestMapping("/api")
 @RestController
 @CrossOrigin(origins="http//localhost:3000")
 public class SelectionController {
@@ -32,12 +32,22 @@ public class SelectionController {
 		return service.getAllSelections();
 		
 	}
-	@GetMapping("/selections1/{id}")
+	@GetMapping("/selections1")
 	public Selection getSelectionById(@PathVariable int id){
 		return service.getSelectionsById(id);
 		
 	}
-	@PostMapping("/selections2")
+	@GetMapping("/selectionsapp")
+	public List<Selection> getSelectionByapp(){
+		return service.getSelectionByIsapp();
+		
+	}
+	@GetMapping("/selectionssel")
+	public List<Selection> getSelectionByselect(){
+		return service.getSelectionByIsselect();
+		
+	}
+	@PostMapping("/selections")
 	public String insertSelection(@RequestBody Selection sel){		
 		 service.insertSelection(sel);
 		return "Selection table created sucessfully";
@@ -47,8 +57,13 @@ public class SelectionController {
 	public String updateSelection(@RequestBody Selection sel )
 	{		
 	
-	    service.updateSelections(sel);
-		return "Selection updated sucessfully";
+		int flag=0;
+	    flag=service.updateSelections(sel);
+	    if(flag==1)
+	    return "student selected successfully";
+	    else
+	    	return "student can not be  select";
+		
 		
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.psl.training.model.Selection;
+import com.psl.training.model.Student;
 import com.psl.training.repository.SelectionRepository;
 
 @Service
@@ -23,12 +24,22 @@ public class SelectionService {
 	public Selection getSelectionsById(int id) {
 		return repository.getSelectionById(id);
 	}
+	public List<Selection> getSelectionByIsapp() {
+		return repository.getSelectionapply();
+	}
+	public List<Selection> getSelectionByIsselect() {
+		return repository.getSelectionselect();
+	}
 	public void insertSelection(Selection sel) {
 		repository.addSelection(sel);
 	}
-	public void updateSelections(Selection sel)
+	public int updateSelections(Selection sel)
 	{
-		 repository.updateSelection(sel);
+		int flag=0;
+		 flag=repository.updateSelection(sel);
+		 if(flag==1)
+			 return flag;
+		 return 0;
 	}
 	
 /*	public List<Student> getEmployesByDepartment(String deptname) {

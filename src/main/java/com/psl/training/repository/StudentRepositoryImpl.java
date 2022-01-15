@@ -83,7 +83,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 		boolean exist1 = false;
 		for(Student currentStudent: stdList)
 		{
-			if(currentStudent.getStd_id()==std.getStd_id());
+			if(currentStudent.getStd_id()==std.getStd_id())
 			{
 			exist1=true;
 			currentStudent.setCgpa(std.getCgpa());

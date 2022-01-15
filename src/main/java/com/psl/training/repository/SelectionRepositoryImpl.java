@@ -1,5 +1,6 @@
 package com.psl.training.repository;
-
+import java.util.ArrayList;
+//import com.psl.training.model;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -27,6 +28,8 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		session.close();
 		return selList;
 	}
+	@Override
+	
 	
 	public  Selection getSelectionById(int id) {
 		
@@ -34,6 +37,9 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		return session.get(Selection.class, id);
 		
 	}
+	
+
+
 	@Override
 	public void addSelection(Selection sel) {
 		
@@ -51,7 +57,7 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 	
 	@Override
 	@Modifying(clearAutomatically = true)
-	public void updateSelection(Selection sel) 
+	public int updateSelection(Selection sel) 
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
@@ -66,22 +72,26 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		
 		session.update(s1);*/
 		List<Selection> selList= session.createQuery("from Selection").list();
-		boolean exist1 = false;
+		int exist1 = 0;
 		for(Selection currentSelection: selList)
 		{
-			if(currentSelection.getStud_sel_id()==sel.getStud_sel_id());
+			if(currentSelection.getIs_applied()==1 && currentSelection.getStd_id()==sel.getStd_id() && currentSelection.getComp_id()==sel.getComp_id())
 			{
-			exist1=true;
+			exist1=1;
 			currentSelection.setIs_select(sel.getIs_select());
 			
 		     }
 		}
-		if(!exist1) {
+		if(exist1==1) {
+			 
 			selList.add(sel);
+			return exist1;
 			
 		}
+		
 		session.getTransaction().commit();
 		session.close();
+		return 0;
 		
 	}
 
@@ -90,7 +100,47 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public List<Selection> getSelectionapply()
+	{
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		
+		Selection s1 = new Selection();
+		List<Selection> selList= session.createQuery("from Selection").list();
+		List<Selection> s2 =  new ArrayList<Selection>();
+		for(Selection currentSelection: selList)
+		{
+			if(currentSelection.getIs_applied()==1 && currentSelection.getIs_select()==0 || currentSelection.getIs_select()==1)
+			{
+			
+			 s2.add(currentSelection);
+			}
+		
+		}
+		return s2;
+	}
 
+	@Override
+	public List<Selection> getSelectionselect()
+	{
+		Session session=sessionFactory.openSession();
+		session.beginTransaction();
+		
+		Selection s1 = new Selection();
+		List<Selection> selList= session.createQuery("from Selection").list();
+		List<Selection> s2 =  new ArrayList<Selection>();
+		for(Selection currentSelection: selList)
+		{
+			if(currentSelection.getIs_select()==1 && currentSelection.getIs_applied()==1)
+			{
+			
+			 s2.add(currentSelection);
+			}
+		
+		}
+		return s2;
+	}
 
 	
 
