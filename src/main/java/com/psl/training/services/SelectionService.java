@@ -36,13 +36,13 @@ public class SelectionService {
 	public void insertSelection(Selection sel) {
 		repository.addSelection(sel);
 	}
-	public int updateSelections(Selection sel)
+	public void updateSelection1(Selection sel)
 	{
-		int flag=0;
-		 flag=repository.updateSelection(sel);
-		 if(flag==1)
-			 return flag;
-		 return 0;
+		repository.updateSelection1(sel);	 
+	}
+
+	public void delete(int id) {
+		repository.delete(id);;
 	}
 	
 /*	public List<Student> getEmployesByDepartment(String deptname) {

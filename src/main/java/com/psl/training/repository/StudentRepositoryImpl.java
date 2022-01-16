@@ -67,18 +67,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
-		//Query qry=session.createQuery("update student set cgpa=:i and T_skills=:t where std_id=:n ");
-		//qry.setParameter("n", id );
-		//qry.setParameter("i", cgpa );
-		//qry.setParameter("t", T_skills );
-		//int status=qry.executeUpdate();
-		//System.out.println(status);  
-		/*Student s1=session.get(Student.class, id);
-		s1.setCgpa(cgpa);
-		s1.setT_skills(T_skills);
-		session.update(s1);
-		session.getTransaction().commit();
-		session.close();*/
+		
 		List<Student> stdList= session.createQuery("from Student").list();
 		boolean exist1 = false;
 		for(Student currentStudent: stdList)

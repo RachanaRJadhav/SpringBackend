@@ -12,6 +12,6 @@ public interface SelectionRepository {
 	public List<Selection> getAppliedStudentsList(int id);
 	public void  deleteSelection(int id);
 	public void  addSelection(Selection sel);
-	public int updateSelection(Selection sel);
-	//public List<Student> getStudentsByDepartment(String deptName);
+	public void updateSelection1(Selection sel);
+	public void delete(int id);
 }

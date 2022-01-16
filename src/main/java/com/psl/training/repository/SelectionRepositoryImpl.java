@@ -55,49 +55,43 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 	
 	@Override
 	@Modifying(clearAutomatically = true)
-	public int updateSelection(Selection sel) 
-	{
+	public void updateSelection1(Selection sel) {
+		
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
-		//Query qry=session.createQuery("update student set cgpa=:i and T_skills=:t where std_id=:n ");
-		//qry.setParameter("n", id );
-		//qry.setParameter("i", cgpa );
-		//qry.setParameter("t", T_skills );
-		//int status=qry.executeUpdate();
-		//System.out.println(status);  
-		/*Selection s1=session.get(Selection.class, id);
-		s1.setIs_select(is_select);
-		
-		session.update(s1);*/
-		List<Selection> selList= session.createQuery("from Selection").list();
-		int exist1 = 0;
-		for(Selection currentSelection: selList)
+		List<Selection> sList= session.createQuery("from Selection").list();
+		for(Selection currentSelection: sList)
 		{
-			if(currentSelection.getIs_applied()==1 && currentSelection.getStd_id()==sel.getStd_id() && currentSelection.getComp_id()==sel.getComp_id())
+			if(currentSelection.getStd_id() == sel.getStd_id() && currentSelection.getComp_id() == sel.getComp_id() && currentSelection.getIs_applied() == 1)
 			{
-			exist1=1;
-			currentSelection.setIs_select(sel.getIs_select());
-			
-		     }
-		}
-		if(exist1==1) {
-			 
-			selList.add(sel);
-			return exist1;
-			
-		}
-		
+				 currentSelection.setIs_select(sel.getIs_select());
+			}	
+		 }
 		session.getTransaction().commit();
 		session.close();
-		return 0;
 		
-	}
+ }
 
 	@Override
-	public void deleteSelection(int id) {
-		// TODO Auto-generated method stub
+	public void delete(int id) {
+		
+//		Session session=sessionFactory.openSession();
+//		session.beginTransaction();
+//		List<Selection> sList= session.createQuery("from Selection").list();
+//		
+//		for(Selection currentSelection: sList)
+//		{
+//			if(currentSelection.getStd_id() == id)
+//			{
+////				 currentSelection.deletById(id);
+//			}	
+//		 }
+//		session.getTransaction().commit();
+//		session.close();
 		
 	}
+	
+	
 	@Override
 	public List<Selection> getCompanyList(int id)
 	{
@@ -109,7 +103,7 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		List<Selection> s2 =  new ArrayList<Selection>();
 		for(Selection currentSelection: selList)
 		{
-			if( currentSelection.getStd_id()== id   && currentSelection.getIs_select()==1 && currentSelection.getIs_applied()==1)
+			if( currentSelection.getStd_id()== id && currentSelection.getIs_select()==1 && currentSelection.getIs_applied()==1)
 			{
 			
 			 s2.add(currentSelection);

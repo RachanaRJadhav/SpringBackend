@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +33,7 @@ public class SelectionController {
 		return service.getAllSelections();
 		
 	}
-	@GetMapping("/selections1/{id}")
+	@GetMapping("/selections/{id}")
 	public Selection getSelectionById(@PathVariable int id){
 		return service.getSelectionsById(id);
 		
@@ -54,7 +55,8 @@ public class SelectionController {
 		
 	}
 	
-	@PostMapping("/selections")
+	@PostMapping("/selections/insert")
+	@CrossOrigin( origins = "http//localhost:3000")
 	public String insertSelection(@RequestBody Selection sel){		
 		 service.insertSelection(sel);
 		return "Selection table created sucessfully";
@@ -62,16 +64,16 @@ public class SelectionController {
 	
 	
 	@PutMapping("/selections")
-	public String updateSelection(@RequestBody Selection sel )
+	public void updateSelection1(@RequestBody Selection sel )
 	{		
-	
-		int flag=0;
-	    flag=service.updateSelections(sel);
-	    if(flag==1)
-	    return "student selected successfully";
-	    else
-	    	return "student can not be  select";
-		
-		
+	   service.updateSelection1(sel);
+	   
 	}
+	
+	@DeleteMapping(value = "/selections/{id}")
+    public void deletePost(@PathVariable int id) {
+
+		service.delete(id);
+
+    }
 }
