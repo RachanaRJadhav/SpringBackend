@@ -87,7 +87,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 			{
 			exist1=true;
 			currentStudent.setCgpa(std.getCgpa());
-			currentStudent.setT_skills(std.getT_skills());
+			currentStudent.setT_skills(currentStudent.getT_skills() + "\t " +std.getT_skills());
 		     }
 		}
 		if(!exist1) {

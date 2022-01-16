@@ -32,33 +32,36 @@ public class SelectionController {
 		return service.getAllSelections();
 		
 	}
-	@GetMapping("/selections1")
+	@GetMapping("/selections1/{id}")
 	public Selection getSelectionById(@PathVariable int id){
 		return service.getSelectionsById(id);
 		
 	}
-	@GetMapping("/selectionselectedcompanylist")//in student portal for displaying company is who have selected that student
-	public List<Selection> getCompanyList(@RequestBody Selection sel){
-		return service.getCompanyList(sel);
+	@GetMapping("/selections/selectedcompanylist/{id}")//in student portal for displaying company is who have selected that student
+	public List<Selection> getCompanyList(@PathVariable int id){
+		return service.getCompanyList(id);
 		
 	}
-	@GetMapping("/selectionsSelectedstudentlist")// in company portal for displaying student selected list
-	public List<Selection> getselectedStudentList(@RequestBody Selection sel){
-		return service.getselectedStudentsList(sel);
+	@GetMapping("/selections/selectedstudentlist/{id}")// in company portal for displaying student selected list
+	public List<Selection> getselectedStudentList(@PathVariable int id){
+		return service.getselectedStudentsList(id);
 		
 	}
-	@GetMapping("/selectionsappliedstudentlist")//in company for displaying students not selected but have applied
-	public List<Selection> getAppliedStudentsList(@RequestBody Selection sel){
-		return service.getAppliedStudentsList(sel);
+	
+	@GetMapping("/selections/appliedstudentlist/{id}")//in company for displaying students not selected but have applied
+	public List<Selection> getAppliedStudentsList(@PathVariable int id){
+		return service.getAppliedStudentsList(id);
 		
 	}
+	
 	@PostMapping("/selections")
 	public String insertSelection(@RequestBody Selection sel){		
 		 service.insertSelection(sel);
 		return "Selection table created sucessfully";
 	}
-	@PutMapping("/selections")
 	
+	
+	@PutMapping("/selections")
 	public String updateSelection(@RequestBody Selection sel )
 	{		
 	

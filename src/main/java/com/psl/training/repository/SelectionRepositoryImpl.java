@@ -45,12 +45,10 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		
 // Programmatic way of managing transactions
 
-	Session session=	sessionFactory.openSession();
+	Session session=sessionFactory.openSession();
 	session.beginTransaction();
 	session.save(sel);
 	session.getTransaction().commit();
-
-
 		
 	}
 
@@ -101,7 +99,7 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		
 	}
 	@Override
-	public List<Selection> getCompanyList(Selection sel)
+	public List<Selection> getCompanyList(int id)
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
@@ -111,7 +109,7 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		List<Selection> s2 =  new ArrayList<Selection>();
 		for(Selection currentSelection: selList)
 		{
-			if( currentSelection.getStd_id()==sel.getStd_id()   && currentSelection.getIs_select()==1 && currentSelection.getIs_applied()==1)
+			if( currentSelection.getStd_id()== id   && currentSelection.getIs_select()==1 && currentSelection.getIs_applied()==1)
 			{
 			
 			 s2.add(currentSelection);
@@ -123,7 +121,7 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 	}
 
 	@Override
-	public List<Selection> getselectedStudentsList(Selection sel)
+	public List<Selection> getselectedStudentsList(int id )
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
@@ -133,7 +131,7 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		List<Selection> s2 =  new ArrayList<Selection>();
 		for(Selection currentSelection: selList)
 		{
-			if( currentSelection.getComp_id()==sel.getComp_id()   && currentSelection.getIs_select()==1 && currentSelection.getIs_applied()==1)
+			if( currentSelection.getComp_id()== id   && currentSelection.getIs_select()==1 && currentSelection.getIs_applied()==1)
 			{
 			
 			 s2.add(currentSelection);
@@ -146,7 +144,7 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 
 
 	@Override
-	public List<Selection> getAppliedStudentsList(Selection sel)
+	public List<Selection> getAppliedStudentsList(int id)
 	{
 		Session session=sessionFactory.openSession();
 		session.beginTransaction();
@@ -156,7 +154,7 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		List<Selection> s2 =  new ArrayList<Selection>();
 		for(Selection currentSelection: selList)
 		{
-			if( currentSelection.getComp_id()==sel.getComp_id()   && currentSelection.getIs_select()==0 && currentSelection.getIs_applied()==1)
+			if( currentSelection.getComp_id()==id   && currentSelection.getIs_select()==0 && currentSelection.getIs_applied()==1)
 			{
 			
 			 s2.add(currentSelection);

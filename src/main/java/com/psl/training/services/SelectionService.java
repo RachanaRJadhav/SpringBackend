@@ -24,14 +24,14 @@ public class SelectionService {
 	public Selection getSelectionsById(int id) {
 		return repository.getSelectionById(id);
 	}
-	public List<Selection> getCompanyList(Selection sel) { //in student portal for displaying company is who have selected that student
-		return repository.getCompanyList(sel);
+	public List<Selection> getCompanyList(int id) { //in student portal for displaying company is who have selected that student
+		return repository.getCompanyList(id);
 	}
-	public List<Selection> getselectedStudentsList(Selection sel) { // in company portal for displaying student selected list
-		return repository.getselectedStudentsList(sel);
+	public List<Selection> getselectedStudentsList(int id) { // in company portal for displaying student selected list
+		return repository.getselectedStudentsList(id);
 	}
-	public List<Selection> getAppliedStudentsList(Selection sel) {//in company for displaying students not selected but have applied
-		return repository.getAppliedStudentsList(sel);
+	public List<Selection> getAppliedStudentsList(int id) {//in company for displaying students not selected but have applied
+		return repository.getAppliedStudentsList(id);
 	}
 	public void insertSelection(Selection sel) {
 		repository.addSelection(sel);

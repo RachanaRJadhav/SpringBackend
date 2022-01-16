@@ -89,6 +89,7 @@ public class Student {
 		return T_skills;
 	}
 	public void setT_skills(String t_skills) {
+		
 		T_skills = t_skills;
 	}
 	
