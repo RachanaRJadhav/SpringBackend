@@ -70,10 +70,10 @@ public class SelectionController {
 	   
 	}
 	
-	@DeleteMapping(value = "/selections/{id}")
-    public void deletePost(@PathVariable int id) {
+	@DeleteMapping(value = "/selections")
+    public void deletePost(@RequestBody Selection sel) {
 
-		service.delete(id);
+		service.delete(sel);
 
     }
 }

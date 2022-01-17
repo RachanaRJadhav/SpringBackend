@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.psl.training.model.Selection;
 import com.psl.training.model.Student;
@@ -73,21 +74,21 @@ public class SelectionRepositoryImpl implements SelectionRepository {
  }
 
 	@Override
-	public void delete(int id) {
+	public void delete(Selection sel) {
 		
-//		Session session=sessionFactory.openSession();
-//		session.beginTransaction();
-//		List<Selection> sList= session.createQuery("from Selection").list();
-//		
-//		for(Selection currentSelection: sList)
-//		{
-//			if(currentSelection.getStd_id() == id)
-//			{
-////				 currentSelection.deletById(id);
-//			}	
-//		 }
-//		session.getTransaction().commit();
-//		session.close();
+      	Session session=sessionFactory.openSession();
+     	session.beginTransaction();
+		List<Selection> sList= session.createQuery("from Selection").list();
+		
+		for(Selection currentSelection: sList)
+		{
+			if(currentSelection.getStd_id() == sel.getStd_id() && currentSelection.getComp_id() == sel.getComp_id())
+			{
+				 session.delete(currentSelection);
+			}	
+		 }
+		session.getTransaction().commit();
+		session.close();
 		
 	}
 	
@@ -158,6 +159,7 @@ public class SelectionRepositoryImpl implements SelectionRepository {
 		 
 		return s2;
 	}
+	
 
 	
 	

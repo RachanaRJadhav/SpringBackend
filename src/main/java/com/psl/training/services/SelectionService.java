@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.psl.training.model.Selection;
 import com.psl.training.model.Student;
@@ -41,8 +42,8 @@ public class SelectionService {
 		repository.updateSelection1(sel);	 
 	}
 
-	public void delete(int id) {
-		repository.delete(id);;
+	public void delete( Selection sel) {
+		repository.delete(sel);
 	}
 	
 /*	public List<Student> getEmployesByDepartment(String deptname) {
